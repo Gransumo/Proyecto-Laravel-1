@@ -91,9 +91,7 @@ class ClientController extends Controller
 		try {
             //return response()->json(Client::all(), 200);
 			return ClientResource::collection(Client::all());
-		} /* catch (QueryException $err) {
-			return response()->json(['error' => 'Server error: ' . $err->getMessage()], 500);
-		}  */catch (\Exception $err) {
+		} catch (\Exception $err) {
 			return response()->json(['error' => $err->getMessage()], 500);
 		}
 	}
@@ -184,11 +182,7 @@ class ClientController extends Controller
 		try {
 			$client = Client::create($request->validated());
 			return response()->json($client, 201);
-		} /* catch (ValidationException $err) {
-			return response()->json(['error' => 'Validation error: ' . $err->getMessage()], 422);
-		} catch (QueryException $err) {
-			return response()->json(['error' => 'Server error: ' . $err->getMessage()], 500);
-		}  */catch (\Exception $err) {
+		} catch (\Exception $err) {
 			return response()->json(['error' => 'Unexpected error: ' . $err->getMessage()], 500);
 		}
 	}
@@ -237,10 +231,7 @@ class ClientController extends Controller
 	{
 		try {
 			return response()->json($client, 200);
-		} /* catch (ModelNotFoundException $err) {
-			$err->setModel(Client::class);
-			return response()->json(['error' => $err->getMessage()], 404);
-		}  */catch (\Exception $err) {
+		} catch (\Exception $err) {
             return response()->json(['error' => 'Unexpected error: ' . $err->getMessage()], 500);
 		}
 	}
@@ -344,12 +335,7 @@ class ClientController extends Controller
 		try {
 			$client->update($request->validated());
 			return response()->json($client, 201);
-		} /* catch (ValidationException $e) {
-			return response()->json(['error' => 'Validation error: ' . $e->getMessage()], 422);
-		} catch (ModelNotFoundException $err) {
-			$err->setModel(Client::class);
-			return response()->json(['error' => $err->getMessage()], 404);
-		}  */catch (Exception $err) {
+		}catch (Exception $err) {
 			return response()->json(['error' => 'Unexpected error: ' . $err->getMessage()], 500);
 		}
 	}
@@ -390,12 +376,7 @@ class ClientController extends Controller
 		try {
 			$client->delete();
 			return response()->json([], 204);
-		} /* catch (ModelNotFoundException $err) {
-            $err->setModel(Client::class);
-			return response()->json(['error' => $err->getMessage()], 404);
-		} catch (QueryException $err) {
-            return response()->json(['error' => 'DataBase error: ' . $err->getMessage()], 500);
-        }  */catch (\Exception $err) {
+		} catch (\Exception $err) {
             return response()->json(['error' => 'Unexpected error: ' . $err->getMessage()], 500);
         }
 	}
